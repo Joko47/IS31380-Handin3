@@ -1,0 +1,1089 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HI3\_handl\_and\_expl}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Hand-in 3, Part 1: Data handling and
+exploration}\label{hand-in-3-part-1-data-handling-and-exploration}
+
+In this first notebook you will show us how you handle data being
+separated over several files, as well as exploring the quality and
+properties of your data.
+
+    \paragraph{Section 1: bash scripting}\label{section-1-bash-scripting}
+
+You have downloaded a zip file containing 5 CSV files, each containing
+part of the data you need. First, use your bash tools to look at the
+headers and size of the file. What do the different files contain?
+
+Write a bash script that concatenates the 4 data files (except the
+flow\_criticality\_data.csv file). Exlain in the markdown cell below,
+what each part of your script does.
+
+    \textbf{Q\#1} \emph{Explain your script here (by double clicking on this
+text).}
+
+\begin{itemize}
+\item
+  Define that we are using bash
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#! /bin/bash}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Quick explanation of what the bashscript does
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Joining the files}
+\CommentTok{#}
+\CommentTok{# Usage "./collect_data.sh }
+\end{Highlighting}
+\end{Shaded}
+\item
+  Make temp1.csv containing half the data -t, means the file is comma
+  seperated, -a1 and -a2 means that it will also print any unpairable
+  line -oauto means that it will automatically format the data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{join} \NormalTok{-t, -a1 -a2 -oauto energy_demand_data.csv exchange_data.csv }\KeywordTok{>} \NormalTok{temp1.csv}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Make temp2.csv containing the other half of data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{join} \NormalTok{-t, -a1 -a2 -oauto renewable_production_data.csv generator_production_data.csv }\KeywordTok{>} \NormalTok{temp2.csv}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Combine the temp files, to one whole file
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{join} \NormalTok{-t, -a1 -a2 -oauto temp1.csv temp2.csv }\KeywordTok{>} \NormalTok{joined_data.csv}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Clean up by removing the temp files
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm} \NormalTok{temp1.csv}
+\KeywordTok{rm} \NormalTok{temp2.csv}
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
+
+    \subsection{Section 2: Visualizing the
+data}\label{section-2-visualizing-the-data}
+
+Here you will plot the resulting data file from the previous section,
+and plot it in order to identify missing data and see if you can already
+draw some conclusions on the data.
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Hint: remember the hint given in Exc.13.3, on how to find out if
+  your data contains NaN values}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Importing the packages we need}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{scipy}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Import of the data created with the bash script}
+         \PY{n}{data}  \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{joined\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Simple plots showing a small pick of our data}
+         
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prod\PYZus{}gen\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prod\PYZus{}gen\PYZus{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{load\PYZus{}node\PYZus{}130}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{load\PYZus{}node\PYZus{}130}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{renew\PYZus{}node\PYZus{}24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{renew\PYZus{}node\PYZus{}24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/student/.local/lib/python3.5/site-packages/matplotlib/\_\_init\_\_.py:830: MatplotlibDeprecationWarning: axes.color\_cycle is deprecated and replaced with axes.prop\_cycle; please use the latter.
+  mplDeprecation)
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f314fe04908>
+\end{Verbatim}
+            
+    \textbf{would it be practical to plot all possible scatter plots
+(scatter matrix)?}
+
+\emph{Not really, unless you use a cluster to compute the data, as there
+are way too many datapoints and columns}
+
+    \textbf{Q\#2} For this data, what is the reasonable approach to dealing
+with the NaN values? Why?
+
+\emph{As there is no directly observable pattern, interpolation does not
+seem like a good aproach. Therefor we will be dropping the NaN's.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Removal of NaN\PYZsq{}s}
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of NaN}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s before removal: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Drop any row containing any NaN\PYZsq{}s}
+         \PY{n}{data\PYZus{}nona} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of NaN}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s after removal: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{data\PYZus{}nona}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total number of NaN's before removal: 1711
+Total number of NaN's after removal: 0
+
+    \end{Verbatim}
+
+    \subsubsection{Feature reduction}\label{feature-reduction}
+
+Since you must reduce the amount of sensors, you need to find out which
+ones you can get rid of.
+
+    \textbf{Q\#3} Why would PCA be useful for this?
+
+\emph{It shows you which components are principal for your data. Thereby
+showing which sensors are impacting the overall data more}
+
+\emph{With that in mind, you can narrow down the amount of sensors, used
+to generate data. Obviously you will loose some data, but choosing the
+correct amount of components, you can get pretty close to the full data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+         
+         \PY{c+c1}{\PYZsh{} Removal of the time column, as this is not usable in math}
+         \PY{n}{datanotime} \PY{o}{=} \PY{n}{data\PYZus{}nona}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Removing any column where more than 90\PYZpc{} of the data is zero}
+         \PY{n}{data\PYZus{}notime2} \PY{o}{=} \PY{n}{datanotime}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{(}\PY{n}{datanotime} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{datanotime}\PY{p}{)}\PY{o}{*}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} First we standardize the data}
+         \PY{n}{data\PYZus{}stand} \PY{o}{=} \PY{p}{(}\PY{n}{data\PYZus{}notime2} \PY{o}{\PYZhy{}} \PY{n}{data\PYZus{}notime2}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{data\PYZus{}notime2}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} The standardization created a lot of NaN\PYZsq{}s}
+         \PY{c+c1}{\PYZsh{} These came from dividing by zero, as a lot of the prod\PYZus{}gen sensors had only zero\PYZsq{}s}
+         \PY{n}{data\PYZus{}stand} \PY{o}{=} \PY{n}{data\PYZus{}stand}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NaN}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s in data set: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{data\PYZus{}stand}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} Then instantiate the data, and make the fit}
+         \PY{n}{comp}\PY{o}{=}\PY{n}{data\PYZus{}stand}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{comp}\PY{p}{)}
+         \PY{n}{pca\PYZus{}data}\PY{o}{=}\PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data\PYZus{}stand}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plotting the explained variance}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sing\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{comp}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sing\PYZus{}vals}\PY{p}{,} \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scree Plot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Principal Component}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cumulative explained variance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sing\PYZus{}vals}\PY{p}{,} \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Individual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cumulative}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderpad}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} 
+                     \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                     \PY{n}{markerscale}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Saving the pca components}
+         \PY{n}{data\PYZus{}components} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{components\PYZus{}}
+         
+         \PY{c+c1}{\PYZsh{}with pd.option\PYZus{}context(\PYZsq{}display.max\PYZus{}rows\PYZsq{}, None, \PYZsq{}display.max\PYZus{}columns\PYZsq{}, 3):}
+         \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{n}{datanotime} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+NaN's in data set: 0
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+load\_node\_130    8311
+load\_node\_133    8311
+load\_node\_134    8311
+load\_node\_143    8311
+load\_node\_16     8311
+load\_node\_145    8311
+load\_node\_21     8311
+load\_node\_153    8311
+load\_node\_154    8311
+load\_node\_156    8311
+load\_node\_159    8311
+load\_node\_160    8311
+load\_node\_162    8311
+load\_node\_167    8311
+load\_node\_43     8311
+load\_node\_52     8311
+load\_node\_181    8311
+load\_node\_182    8311
+load\_node\_184    8311
+load\_node\_186    8311
+load\_node\_60     8311
+load\_node\_63     8311
+load\_node\_64     8311
+load\_node\_66     8311
+load\_node\_68     8311
+load\_node\_69     8311
+load\_node\_197    8311
+load\_node\_73     8311
+load\_node\_77     8311
+load\_node\_208    8311
+                 {\ldots} 
+prod\_gen\_22      3227
+prod\_gen\_23      3304
+prod\_gen\_24         0
+prod\_gen\_25      3328
+prod\_gen\_26         0
+prod\_gen\_27      3103
+prod\_gen\_28         0
+prod\_gen\_29      3035
+prod\_gen\_30      2238
+prod\_gen\_31      3091
+prod\_gen\_32      3210
+prod\_gen\_33      2344
+prod\_gen\_34      3083
+prod\_gen\_35       750
+prod\_gen\_36         0
+prod\_gen\_37      3022
+prod\_gen\_38      3086
+prod\_gen\_39      3018
+prod\_gen\_40      2963
+prod\_gen\_41      2776
+prod\_gen\_42        75
+prod\_gen\_43         0
+prod\_gen\_44       151
+prod\_gen\_45         0
+prod\_gen\_46         0
+prod\_gen\_47         0
+prod\_gen\_48         0
+prod\_gen\_49         0
+prod\_gen\_50         2
+prod\_gen\_51      4829
+dtype: int64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Find the number of components needed to explain 90\PYZpc{} of the variance}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{comp}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.9}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{with }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ components you explain }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+                \PY{n}{new\PYZus{}comp}\PY{o}{=}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{k}{break}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+with 21 components you explain 90.2140550348\%
+
+    \end{Verbatim}
+
+    \subsubsection{Scree plot}\label{scree-plot}
+
+\textbf{Q\#4} How many principal components do you need to explain 90 \%
+of the variance
+
+26 pricipal components would be needed to explain more than 90\% of the
+variance
+
+26 components will explain 90.35\% of the variance
+
+    \subsubsection{Clustering}\label{clustering}
+
+You want to reduce the amount of field sensors to 20. You should now
+have from the previous question, an array with all your loading vectors
+(pca.components\_), one vector per principal component, with 137
+elements (one per each sensor). Use clustering to group sensors that
+behave the same.
+
+    \textbf{Q\#5} How would you choose which sensors in each cluster you
+should keep?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+         
+         \PY{c+c1}{\PYZsh{} Slice the components we need. We take 26 as that gives us about 90\PYZpc{} explained variance}
+         \PY{n+nb}{slice}\PY{o}{=}\PY{n}{data\PYZus{}components}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{new\PYZus{}comp}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Instanciate and fit the clusters}
+         \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{n\PYZus{}init}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{0.0001}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{copy\PYZus{}x}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n+nb}{slice}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         \PY{n}{cluster\PYZus{}pred} \PY{o}{=} \PY{n}{kmeans}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n+nb}{slice}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Prints the predicted clusters}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{cluster\PYZus{}pred}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0  0  0  0 19  0 19  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0 14 13 17  0  4  0 14 18 14 10  0  3 11  0
+  3 10  0  5 14 15 13  7  0  8  6 18  8  7  6  7 16 18  6  5  6 18 18  2  2
+  2  9 11  9 11 10 11 13 10  0  1 15 12 14 14  3 15  1  3 15  4  1  1  1  3
+  4  4  3 12  1 15 15 15  3 14]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}
+         
+         \PY{c+c1}{\PYZsh{} Make a pandas dataframe of our sensors, and the clusters they belong to}
+         \PY{n}{clust} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data\PYZus{}stand}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sensors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{clust}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{cluster\PYZus{}pred}
+         
+         \PY{c+c1}{\PYZsh{} calculate the distance from a sensor to the cluster center}
+         \PY{n}{temp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{slice}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{A}\PY{o}{=}\PY{n+nb}{slice}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             \PY{n}{B}\PY{o}{=}\PY{n}{kmeans}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{n}{clust}\PY{o}{.}\PY{n}{cluster}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}
+             \PY{n}{temp}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{scipy}\PY{o}{.}\PY{n}{spatial}\PY{o}{.}\PY{n}{distance}\PY{o}{.}\PY{n}{euclidean}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}\PY{p}{)}
+         \PY{n}{clust}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dist\PYZus{}to\PYZus{}center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{temp}
+         
+         \PY{c+c1}{\PYZsh{} Find the sensor in a cluster that is closest to the cluster centers}
+         \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{n}{data\PYZus{}reduced} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{sensor\PYZus{}cluster} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{while} \PY{n}{x} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{clust}\PY{o}{.}\PY{n}{cluster}\PY{p}{)}\PY{p}{:}
+             \PY{n}{temp\PYZus{}min} \PY{o}{=} \PY{l+m+mi}{100000}
+             \PY{n}{temp\PYZus{}ind} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{slice}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{clust}\PY{o}{.}\PY{n}{cluster}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{x}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{clust}\PY{o}{.}\PY{n}{dist\PYZus{}to\PYZus{}center}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{temp\PYZus{}min}\PY{p}{:}
+                         \PY{n}{temp\PYZus{}min} \PY{o}{=} \PY{n}{clust}\PY{o}{.}\PY{n}{dist\PYZus{}to\PYZus{}center}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                         \PY{n}{temp\PYZus{}ind} \PY{o}{=} \PY{n}{i}
+             \PY{n}{data\PYZus{}reduced}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{clust}\PY{o}{.}\PY{n}{sensors}\PY{p}{[}\PY{n}{temp\PYZus{}ind}\PY{p}{]}\PY{p}{)}
+             \PY{n}{x}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{} Make a new pandas dataframe witht the reduced sensor list}
+         \PY{n}{data\PYZus{}reduced} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data\PYZus{}reduced}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sensors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Sort the list of clusters by their distance to the center, for manual check up}
+         \PY{n}{sorted\PYZus{}clust} \PY{o}{=} \PY{n}{clust}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dist\PYZus{}to\PYZus{}center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} For manual check}
+         \PY{c+c1}{\PYZsh{}print(data\PYZus{}reduced.to\PYZus{}string(index=False))}
+         \PY{c+c1}{\PYZsh{}with pd.option\PYZus{}context(\PYZsq{}display.max\PYZus{}rows\PYZsq{}, None, \PYZsq{}display.max\PYZus{}columns\PYZsq{}, 3):}
+         \PY{c+c1}{\PYZsh{}    print(sorted\PYZus{}clust)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{data\PYZus{}nona}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{data\PYZus{}reduced}\PY{o}{.}\PY{n}{sensors}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{data\PYZus{}reduced}\PY{o}{.}\PY{n}{sensors}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{==} \PY{n}{data\PYZus{}nona}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                         \PY{c+c1}{\PYZsh{}print(i)}
+                         \PY{c+c1}{\PYZsh{}print(data\PYZus{}stand.columns[i])}
+                         \PY{n}{index}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                         \PY{n}{x}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+         
+         \PY{n}{data\PYZus{}reduced} \PY{o}{=} \PY{n}{data\PYZus{}nona}\PY{p}{[}\PY{n}{index}\PY{p}{]}     
+         \PY{c+c1}{\PYZsh{}print(data\PYZus{}stand.columns[0])}
+         \PY{c+c1}{\PYZsh{}data\PYZus{}reduced.sensors.iloc[2]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{data\PYZus{}reduced}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      load\_node\_21  load\_node\_98  export\_node\_130  export\_node\_68  \textbackslash{}
+0         215.2788       28.1763       -13.551973      -42.135706   
+1         206.9927       26.2146       -11.235127      -39.463754   
+2         197.3522       24.4661       -11.064903      -36.113954   
+3         182.1743       23.3269        -8.057087      -33.309821   
+4         170.3825       22.8990        -6.710398      -33.277878   
+5         163.4111       22.8241       -11.968168      -33.750251   
+6         159.7063       22.9061       -14.185416      -33.848466   
+7         157.6746       22.5140        -7.571923      -32.970572   
+8         147.4763       22.7774        -6.455184      -32.062082   
+9         149.3885       24.1631        -4.704244      -28.566337   
+10        163.1721       25.8698        -8.997888      -24.867395   
+11        181.8954       26.7083        -9.447832      -12.307933   
+12        198.4277       27.2846        -9.721543       -5.917242   
+13        201.8139       27.2777       -11.967444       -0.099741   
+15        186.0385       25.5938       -22.109946       13.994299   
+16        187.3132       26.7856       -19.225204       18.059623   
+17        194.3245       30.7734       -21.608521       25.246866   
+18        227.8672       32.4311       -22.851104        1.513755   
+19        239.9777       33.1325       -21.395720      -10.393060   
+20        244.2801       33.7336       -21.962749      -12.033530   
+21        246.4312       33.3345       -21.024712       24.105576   
+22        241.3321       30.7683       -16.280193       47.409944   
+23        231.7314       27.5392        -9.691951       55.242138   
+24        211.1756       24.5830        -3.743955      101.539391   
+25        193.1294       22.7913         2.064144       95.347934   
+26        179.8637       22.0267         9.537699       98.124698   
+27        171.8167       21.8283        13.120048       86.721774   
+28        167.9127       22.6468        37.358496       47.567350   
+29        166.3192       25.3687        54.988523       22.415660   
+30        171.7768       29.1893        30.147381       23.104025   
+{\ldots}            {\ldots}           {\ldots}              {\ldots}             {\ldots}   
+8752      201.1765       29.3094       -23.016304      -35.480752   
+8754      239.3403       34.0242       -27.037347      -49.252993   
+8755      253.2434       34.9559       -26.809996      -52.041206   
+8756      257.5856       35.4617       -24.635875      -53.379236   
+8757      256.5100       34.5375       -25.268615      -52.431439   
+8758      250.4548       31.8630       -22.778341      -48.235997   
+8759      238.3444       28.7036       -20.190085      -41.896757   
+8760      215.9162       25.6054       -17.694564      -36.326660   
+8761      196.0375       23.7367       -17.035022      -32.447554   
+8762      178.5093       22.7860       -16.782579      -31.685681   
+8763      168.8687       22.3913       -17.312934      -30.590878   
+8764      165.9606       22.7150       -16.828392      -30.644860   
+8765      165.2037       23.9888       -18.996376      -31.397702   
+8766      166.9964       26.5631       -21.957257      -34.737374   
+8767      173.7687       29.0247       -23.908185      -37.066422   
+8768      179.5052       32.0381       -23.348965      -40.329824   
+8769      198.8660       34.1407       -20.430098      -39.661120   
+8770      219.4218       34.2206       -17.067493      -21.862124   
+8771      228.7437       33.5561        -9.877864        6.029681   
+8772      236.8704       33.5756        -0.209968        1.975116   
+8773      234.9184       32.9186         0.502809       -0.810884   
+8774      231.1339       32.0022        -0.078103      -14.927743   
+8775      234.4802       31.6617       -11.544949       -4.827103   
+8776      233.3249       32.5491       -23.345121       -6.086408   
+8777      238.3045       36.0762       -29.924388        9.704716   
+8778      263.5611       37.0401       -21.911372      -10.011761   
+8780      251.9287       33.5002       -18.139910        7.433872   
+8781      226.7120       30.6642        -8.244008        1.656642   
+8782      214.1235       29.3810         5.043746       11.181359   
+8783      207.5106       28.1166        31.612792       -3.659594   
+
+      export\_node\_170  export\_node\_108  export\_node\_59  renew\_node\_24  \textbackslash{}
+0        -1483.942990        30.327760      -13.871218     153.470195   
+1        -1426.811167        28.628956      -11.674057     146.519552   
+2        -1374.632122        29.129438       -8.783290     138.456806   
+3        -1311.463964        32.912220       -8.360663     102.313463   
+4        -1285.376107        42.026312       -7.590000      77.569175   
+5        -1256.864499        37.536154       -6.717537      82.851663   
+6        -1267.533880        28.812487       -5.332699      64.223940   
+7        -1245.461478         6.303337        2.196032      50.600680   
+8        -1236.965450         2.706778       21.206081      66.453654   
+9        -1265.019227        13.897688       41.972870     110.786784   
+10       -1333.540199        25.724247       69.281997     161.459246   
+11       -1370.919142        31.812092       78.626633     219.761975   
+12       -1402.586240        32.023168       86.647138     258.969846   
+13       -1416.671112        28.639073      104.007273     278.758641   
+15       -1390.179914        20.114482       98.419034     274.565962   
+16       -1525.414121        -3.407993       78.190772     241.326321   
+17       -1756.506130       -12.513667       81.893064     274.133355   
+18       -1860.564570        -9.606389       88.921471     264.958507   
+19       -1897.724337       -12.220960       91.272087     260.232069   
+20       -1930.662726        -9.507532      101.874609     429.271704   
+21       -1898.906013        -4.281519      100.484876     260.232069   
+22       -1734.363439       -11.985458       78.863836     197.120232   
+23       -1487.705929        -9.456186       58.363388     309.442621   
+24       -1276.601701       -14.704700       89.089751     330.294550   
+25       -1133.655934       -13.635200       79.357536     263.846404   
+26       -1269.043500       -13.183500       19.291446     266.626661   
+27       -1258.139100       -13.070200       18.164159     312.222878   
+28        -906.310744       -13.569000       17.763272     308.330518   
+29       -1464.916600       -15.218300       24.181379     303.882107   
+30       -1216.236898       -17.526800       28.037562     313.891032   
+{\ldots}               {\ldots}              {\ldots}             {\ldots}            {\ldots}   
+8752     -1664.042029        33.771070      -13.539574     316.393264   
+8754     -1947.256135        19.528014      -15.739484     164.591223   
+8755     -2001.417356        25.996428      -14.629350     160.976889   
+8756     -2027.311363        18.996654      -13.242404     118.716980   
+8757     -1973.037502         2.957761      -10.353199     117.604878   
+8758     -1813.443189         1.401071       -6.064657      82.573637   
+8759     -1617.384817        -0.805285        3.023686      75.622995   
+8760     -1426.101490        -6.292839        9.674547      68.116300   
+8761     -1330.370396        -8.963755        9.745359      67.004197   
+8762     -1283.221927       -10.635380       14.677757      81.461535   
+8763     -1260.634082       -10.760473       31.279590      98.421103   
+8764     -1285.323462       -10.053062       50.168027     110.376209   
+8765     -1362.106764       -11.374880       58.559508     120.941186   
+8766     -1508.886286       -13.126104       49.162631     100.923335   
+8767     -1638.146954       -10.631164       51.292363      75.901020   
+8768     -1769.356791        -2.612952       46.376855     115.015204   
+8769     -1836.639625         4.850390       61.966193     197.685432   
+8770     -1806.669920        13.832932       77.056192     339.124788   
+8771     -1728.653672        25.868577      103.833084     429.592055   
+8772     -1680.653125        31.420050      116.753103     478.515254   
+8773     -1638.752509       -19.731200      -17.862700     500.177665   
+8774     -1470.699471       -19.179600      -17.363300     499.261266   
+8775     -1452.690305        29.700201      -17.174200     442.218893   
+8776     -1491.993437         8.444941       98.356955     221.864521   
+8777     -1700.871891         4.081316       95.020273     259.397992   
+8778     -1872.246659        10.507576       90.086575     247.442887   
+8780     -1792.845586        39.009472       85.463238     331.962704   
+8781     -1627.009469         5.083337       80.633873     477.092127   
+8782     -1538.843315        -1.106469       93.283131     580.239668   
+8783     -1481.595250        -0.120091       86.681057     735.934068   
+
+      renew\_node\_154  renew\_node\_155  renew\_node\_25  renew\_node\_202  \textbackslash{}
+0           0.370617       29.337907     214.272551       72.803164   
+1           0.648579       23.361666     219.077178       61.440821   
+2           0.440107       20.916841     192.427051       48.605581   
+3           0.416944       16.706308     210.919682       52.813856   
+4           0.509598       13.446541     226.059443       48.605581   
+5           0.625416       11.952480     218.869784       44.818133   
+6           1.482467       10.458420     238.295688       51.340960   
+7           2.895443        9.371831     244.448376       55.128408   
+8           8.661745       42.433941     244.469218       70.159737   
+9          20.134604      105.891829     252.621585      133.034930   
+10         30.162869      154.510438     281.913241      206.621388   
+11         35.869314      200.357980     320.059947      254.185544   
+12         37.420754      218.053820     338.237217      301.456276   
+13         35.968062      203.690635     338.832409      363.278801   
+15         27.622524      140.441553     333.683362      387.746552   
+16         12.184026       48.217393     336.254779      236.715491   
+17         11.720755       75.382121     331.692112      324.668446   
+18         11.581774       86.791307     320.008917      224.301078   
+19         11.836573      102.411026     309.328127      155.706190   
+20         13.458021      124.686103     244.033588      189.161979   
+21         18.970945      148.862711     213.754066      227.457285   
+22         28.884943      219.491005     203.730024      175.905911   
+23         87.187592      253.718563     198.026689      143.712605   
+24        122.581492      262.275452     169.959370      119.094194   
+25         73.405281      244.210908     159.797065       78.694750   
+26         61.869835      303.565839     184.718908       65.017855   
+27         30.460065      422.411525     140.129202       51.340960   
+28         34.050414      434.907300     128.964492       48.605581   
+29         56.495892      416.163638     122.327885       41.872340   
+30         88.762713      545.060274     121.567440       49.236822   
+{\ldots}              {\ldots}             {\ldots}            {\ldots}             {\ldots}   
+8752        0.579089       47.402451     138.539181      372.642786   
+8754        0.972869       32.597674     104.941356      289.529347   
+8755        1.111850       37.487325     107.430084      269.540039   
+8756        0.579089       37.623149     111.059478      207.888804   
+8757        0.416944       33.412616     119.113278      153.391638   
+8758        0.602252       36.536560     148.459527      119.515021   
+8759        0.486434       34.906676     205.320044       97.842403   
+8760        0.741234       38.166443     222.568310       95.738265   
+8761        0.972869       29.337907     228.962958      114.044263   
+8762        0.857051       19.558604     228.720999      128.562813   
+8763        1.436140       19.422781     232.177565      143.923018   
+8764        2.270028       14.261482     244.482941      139.083502   
+8765        2.038392       14.397306     276.214221      119.304607   
+8766        1.227668       10.322597     293.946407       95.107024   
+8767        2.038392        9.236008     302.622388       79.115577   
+8768        4.976219       25.274098     323.525866      102.943769   
+8769        6.186009       61.953969     337.450836      153.536165   
+8770        8.702043      113.131238     348.035808      214.968369   
+8771       11.755251      157.055922     347.885755      258.790909   
+8772       13.836786      213.047774     345.972212      284.008998   
+8773       25.800815      246.548254     345.180380      282.104378   
+8774       24.070193      203.415100     348.674041      251.512486   
+8775       13.016961      153.333330     342.565400      201.036896   
+8776        5.605578       68.590939     291.353982       53.865925   
+8777       11.164830       63.429641     227.303806       72.803164   
+8778       10.052979       58.404166     254.126762       52.393029   
+8780        4.447401       54.872751     175.420745      117.410883   
+8781        5.281289       76.468710     146.523850      143.081363   
+8782        7.667134       80.815067     126.060977      160.545706   
+8783        8.825311       77.012005     122.051360      143.502191   
+
+      renew\_node\_86  renew\_node\_99  prod\_gen\_5  prod\_gen\_7   prod\_gen\_9  \textbackslash{}
+0         24.167230      11.497852  630.000000       216.0  2087.000000   
+1         22.190728      14.947207  630.000000       216.0  2087.000000   
+2         27.805791      16.096993  630.000000       216.0  2087.000000   
+3         26.795080      23.871730  630.000000       216.0  1285.816619   
+4         13.723213      28.525623  630.000000       216.0  1161.453333   
+5         12.083615      20.860388  630.000000       216.0  1187.137617   
+6         10.399096      13.304657  630.000000       216.0  1735.962751   
+7          6.962678      14.180684  630.000000       216.0  1610.288014   
+8         10.405837      16.849188  589.355080       216.0     0.000000   
+9         24.563587      21.137547    0.000000       216.0     0.000000   
+10        35.466481      34.093673    0.000000         0.0     0.000000   
+11        42.296404      58.418471    0.000000         0.0     0.000000   
+12        44.415270      73.544911   89.888871         0.0     0.000000   
+13        45.320811      91.973110    0.000000         0.0     0.000000   
+15        14.846226      96.301855    0.000000         0.0     0.000000   
+16        14.060117     123.848289    0.000000         0.0     0.000000   
+17         9.882511     119.741914   76.756049         0.0     0.000000   
+18         9.298544     153.523697  630.000000        43.2     0.000000   
+19         9.949891     199.077091  630.000000         0.0     0.000000   
+20        13.318929     173.289052  630.000000         0.0     0.000000   
+21         9.972352     179.147481    0.000000       216.0     0.000000   
+22        12.937105     183.801374    0.000000         0.0     0.000000   
+23        19.585339     227.493210    0.000000         0.0     0.000000   
+24         0.000000     285.365731    0.000000         0.0     0.000000   
+25         0.000000     319.476025    0.000000         0.0     0.000000   
+26         0.000000     385.123283    0.000000         0.0     0.000000   
+27         0.000000     388.736894    0.000000         0.0     0.000000   
+28         0.000000     344.388037    0.000000         0.0     0.000000   
+29         0.000000     346.194842    0.000000         0.0     0.000000   
+30         0.000000     287.720053    0.000000         0.0     0.000000   
+{\ldots}             {\ldots}            {\ldots}         {\ldots}         {\ldots}          {\ldots}   
+8752      17.900820      10.293315  630.000000       216.0  2087.000000   
+8754       9.073941      16.480254  630.000000       216.0  2087.000000   
+8755       6.131649      10.786080  630.000000       216.0  2087.000000   
+8756       1.976502       9.307785  630.000000       216.0  2087.000000   
+8757       1.527297      14.290187  630.000000       216.0  2087.000000   
+8758       1.123013      14.454442  630.000000       216.0  2087.000000   
+8759       1.078092      18.944080  630.000000       216.0  2087.000000   
+8760       1.639598      22.393435  630.000000       216.0  2087.000000   
+8761       1.909121      19.272590  630.000000         0.0  2087.000000   
+8762       1.392536      17.301529  630.000000         0.0  2087.000000   
+8763       1.325155      26.335556  630.000000         0.0  2087.000000   
+8764       1.257774      28.087609  630.000000         0.0  2087.000000   
+8765       1.392536      26.992576  630.000000         0.0  2087.000000   
+8766       1.370075      33.234267  630.000000         0.0  2087.000000   
+8767       3.189356      41.611273  630.000000         0.0  2087.000000   
+8768      13.871550      75.015603  515.810531         0.0  2087.000000   
+8769      25.773008     118.563817  521.793750         0.0  2087.000000   
+8770      35.709014     132.009118  232.585510         0.0     0.000000   
+8771      37.095782     185.078698    0.000000         0.0     0.000000   
+8772      38.916159     287.753869    0.000000         0.0     0.000000   
+8773      30.477718     403.776184    0.000000         0.0     0.000000   
+8774      27.523778     384.457439    0.000000         0.0     0.000000   
+8775      15.317891     356.972976    0.000000         0.0     0.000000   
+8776      10.264335     270.199517    0.000000         0.0     0.000000   
+8777       9.029021     254.266780    0.000000         0.0     0.000000   
+8778      12.442979     211.177211    0.000000         0.0  2087.000000   
+8780      13.588452     160.422408    0.000000         0.0  2087.000000   
+8781      12.600201     202.088433    0.000000         0.0    40.513982   
+8782      18.619548     262.862793    0.000000         0.0     0.000000   
+8783      14.329640     253.171746    0.000000       216.0   690.879932   
+
+      prod\_gen\_25  prod\_gen\_31  prod\_gen\_41  
+0      957.000000   146.000000     0.000000  
+1      957.000000   146.000000     0.000000  
+2      957.000000   146.000000     0.000000  
+3      957.000000   146.000000     0.000000  
+4      957.000000   146.000000     0.000000  
+5      957.000000   146.000000     0.000000  
+6      957.000000   146.000000     0.000000  
+7      957.000000   146.000000     0.000000  
+8      191.400000   146.000000     0.000000  
+9        0.000000    10.990596     0.000000  
+10       0.000000     0.000000     0.000000  
+11       0.000000     0.000000     0.000000  
+12       0.000000     0.000000     0.000000  
+13       0.000000     0.000000     0.000000  
+15       0.000000     0.000000     0.000000  
+16       0.000000     0.000000     0.000000  
+17     957.000000     0.000000     0.000000  
+18     957.000000   146.000000     0.000000  
+19     957.000000    18.209404     0.000000  
+20     957.000000   146.000000     0.000000  
+21       0.000000     0.000000     0.000000  
+22       0.000000     0.000000     0.000000  
+23       0.000000     0.000000     0.000000  
+24       0.000000     0.000000     0.000000  
+25       0.000000     0.000000     0.000000  
+26       0.000000     0.000000     0.000000  
+27       0.000000     0.000000     0.000000  
+28       0.000000     0.000000     0.000000  
+29       0.000000     0.000000     0.000000  
+30       0.000000     0.000000     0.000000  
+{\ldots}           {\ldots}          {\ldots}          {\ldots}  
+8752   957.000000   146.000000  1400.000000  
+8754   957.000000   146.000000  1400.000000  
+8755   957.000000   146.000000  1400.000000  
+8756   957.000000   146.000000  1400.000000  
+8757   957.000000   146.000000  1400.000000  
+8758   957.000000   146.000000  1400.000000  
+8759   957.000000   146.000000  1400.000000  
+8760   957.000000   146.000000  1400.000000  
+8761   957.000000   146.000000  1400.000000  
+8762   957.000000    28.429972  1323.121084  
+8763   957.000000     0.000000   582.484027  
+8764   957.000000     0.000000   188.162833  
+8765   957.000000     0.000000   871.768327  
+8766   957.000000     0.000000  1400.000000  
+8767   957.000000     0.000000  1400.000000  
+8768   957.000000     0.000000   881.359767  
+8769     0.000000     0.000000     0.000000  
+8770     0.000000     0.000000     0.000000  
+8771     0.000000     0.000000     0.000000  
+8772     0.000000     0.000000     0.000000  
+8773     0.000000     0.000000     0.000000  
+8774     0.000000     0.000000     0.000000  
+8775     0.000000     0.000000     0.000000  
+8776     0.000000     0.000000     0.000000  
+8777     0.000000     0.000000     0.000000  
+8778     0.000000     0.000000     0.000000  
+8780   957.000000     0.000000     0.000000  
+8781   389.722301     0.000000     0.000000  
+8782    41.189710     0.000000     0.000000  
+8783     0.000000     0.000000     0.000000  
+
+[8311 rows x 20 columns]
+
+    \end{Verbatim}
+
+    \subsubsection{Save your chosen sensors}\label{save-your-chosen-sensors}
+
+Now that you have chosen 20 sensors which are representative of your
+data, create a DataFrame that contains these sensors. You can save them
+to csv file using the code in the following cell.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} Assuming of course that your reduced data set is called data\PYZus{}reduced}
+         
+         \PY{n}{data\PYZus{}reduced}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{data\PYZus{}nona}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{data\PYZus{}reduced}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reduced\PYZus{}field\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/student/.local/lib/python3.5/site-packages/ipykernel\_launcher.py:3: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  This is separate from the ipykernel package so we can avoid doing imports until
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
